@@ -1,0 +1,26 @@
+{
+  "name": "Woocommerce Paljet Integration",
+  "description": "Woocommerce Paljet Integration",
+  "keywords": ["paljet", "client", "api", "php", "woocommerce"],
+  "homepage": "https://www.letsgodev.com/",
+  "type": "wordpress-plugin",
+  "license": "GPL-2.0+",
+  "authors": [
+    {
+      "name": "Paljet and contributors",
+      "homepage": "https://github.com/gonzalesc/paljet-php/contributors"
+    }
+  ],
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "repositories": [
+        {
+          "type": "git",
+          "url": "https://github.com/gonzalesc/paljet-php.git"
+        }
+    ],
+  "require": {
+    "php": ">=5.3.3",
+    "gonzalesc/paljet-php": "dev-master"
+  }
+}

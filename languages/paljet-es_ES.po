@@ -1,0 +1,1038 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce Paljet Integration\n"
+"POT-Creation-Date: 2023-04-30 08:49-0300\n"
+"PO-Revision-Date: 2023-04-30 08:55-0300\n"
+"Last-Translator: \n"
+"Language-Team: Letsgodev\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: esc_html__;esc_html_e;__;_e\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: vendor\n"
+
+#: includes/admin/class-paljet-admin.php:29
+msgid "Settings"
+msgstr "Ajustes"
+
+#: includes/admin/class-paljet-metaboxes.php:74
+#: includes/admin/class-paljet-metaboxes.php:112
+msgid "Actions"
+msgstr "Acciones"
+
+#: includes/admin/class-paljet-metaboxes.php:92
+#: includes/admin/class-paljet-metaboxes.php:135
+msgid "Sync Images from Paljet"
+msgstr "Sincronizar imágenes desde Paljet"
+
+#: includes/admin/class-paljet-metaboxes.php:120
+msgid "History ( Maximum 15 messages )"
+msgstr "Historial ( Máximo 15 mensajes )"
+
+#: includes/admin/class-paljet-settings.php:76
+msgid "Synchronizing. It may take several minutes."
+msgstr "Sincronizando. Eso puede tardar varios minutos."
+
+#: includes/admin/class-paljet-settings.php:77
+msgid "Completed synchronization."
+msgstr "Sicronización completa."
+
+#: includes/admin/class-paljet-settings.php:78
+#: includes/admin/class-paljet-settings.php:84
+msgid "There was an error."
+msgstr "Hubo un error."
+
+#: includes/admin/class-paljet-settings.php:79
+msgid "Total pages : "
+msgstr "Total de páginas : "
+
+#: includes/admin/class-paljet-settings.php:80
+msgid "Page loaded : "
+msgstr "Página cargada : "
+
+#: includes/admin/class-paljet-settings.php:82
+msgid "Deleting logs..."
+msgstr "Borrando logs..."
+
+#: includes/admin/class-paljet-settings.php:83
+msgid "Logs deleted."
+msgstr "Logs borrados."
+
+#: includes/admin/class-paljet-settings.php:120
+msgid "Paljet ERP connected"
+msgstr "ERP Paljet conectado"
+
+#: includes/admin/class-paljet-wc-tabs.php:26 includes/class-paljet.php:69
+msgid "Paljet ERP"
+msgstr "Paljet ERP"
+
+#: includes/admin/class-paljet-wc-tabs.php:41
+#: includes/admin/class-paljet-wc-tabs.php:423
+msgid "General"
+msgstr "General"
+
+#: includes/admin/class-paljet-wc-tabs.php:45
+msgid "Syncs"
+msgstr "Syncs"
+
+#: includes/admin/class-paljet-wc-tabs.php:46
+#: includes/admin/class-paljet-wc-tabs.php:218
+msgid "Orders"
+msgstr "Pedidos"
+
+#: includes/admin/class-paljet-wc-tabs.php:47
+#: includes/admin/class-paljet-wc-tabs.php:295
+msgid "Vouchers"
+msgstr "Anticipos"
+
+#: includes/admin/class-paljet-wc-tabs.php:51
+#: includes/admin/class-paljet-wc-tabs.php:364
+msgid "Logs"
+msgstr "Logs"
+
+#: includes/admin/class-paljet-wc-tabs.php:100
+msgid "You must set a product limit to sync"
+msgstr "Debes setear un limite de producto a sincronizar"
+
+#: includes/admin/class-paljet-wc-tabs.php:105
+msgid "You must set a price list to regular price"
+msgstr "Debes setear una lista de precio para precio regular"
+
+#: includes/admin/class-paljet-wc-tabs.php:109
+msgid "You must set the warehouses"
+msgstr "Debes setear los depósitos"
+
+#: includes/admin/class-paljet-wc-tabs.php:113
+#: includes/admin/class-paljet-wc-tabs.php:114
+msgid "You must set an attribute to the brand"
+msgstr "Debes setear un atributo para la marca"
+
+#: includes/admin/class-paljet-wc-tabs.php:119
+msgid "You must set your URL to the resources"
+msgstr "Debes setear su URL de recursos"
+
+#: includes/admin/class-paljet-wc-tabs.php:131
+msgid "Sync"
+msgstr "Syncronizar"
+
+#: includes/admin/class-paljet-wc-tabs.php:136
+msgid "Categories"
+msgstr "Categorías"
+
+#: includes/admin/class-paljet-wc-tabs.php:137
+msgid "Sync Categories"
+msgstr "Sincronizar Categorías"
+
+#: includes/admin/class-paljet-wc-tabs.php:146
+msgid "Brands"
+msgstr "Marcas"
+
+#: includes/admin/class-paljet-wc-tabs.php:147
+msgid "Sync Brands"
+msgstr "Sincronizar Marcas"
+
+#: includes/admin/class-paljet-wc-tabs.php:157
+msgid "Products"
+msgstr "Products"
+
+#: includes/admin/class-paljet-wc-tabs.php:158
+msgid "Sync Products"
+msgstr "Sincronizar Productos"
+
+#: includes/admin/class-paljet-wc-tabs.php:171
+msgid "Options"
+msgstr "Opciones"
+
+#: includes/admin/class-paljet-wc-tabs.php:176
+msgid "Regular Price"
+msgstr "Precio Regular"
+
+#: includes/admin/class-paljet-wc-tabs.php:183
+#: includes/admin/class-paljet-wc-tabs.php:203
+msgid "Need Sync? Click here"
+msgstr "Necesitas sincronizar? Click aqui"
+
+#: includes/admin/class-paljet-wc-tabs.php:186
+msgid "Sale Price"
+msgstr "Precio de Oferta"
+
+#: includes/admin/class-paljet-wc-tabs.php:195
+msgid "Warehouses"
+msgstr "Depósitos"
+
+#: includes/admin/class-paljet-wc-tabs.php:202
+msgid "Choose a warehouse"
+msgstr "Elige un depósito"
+
+#: includes/admin/class-paljet-wc-tabs.php:223
+#: includes/admin/class-paljet-wc-tabs.php:300
+msgid "Point of Sale ID"
+msgstr "ID del Punto de Venta"
+
+#: includes/admin/class-paljet-wc-tabs.php:229
+#: includes/admin/class-paljet-wc-tabs.php:306
+msgid "Enter your point of sale ID"
+msgstr "Ingrese el ID punto de venta"
+
+#: includes/admin/class-paljet-wc-tabs.php:231
+#: includes/admin/class-paljet-wc-tabs.php:308
+msgid "Classification ID"
+msgstr "ID de la Clasificación"
+
+#: includes/admin/class-paljet-wc-tabs.php:237
+#: includes/admin/class-paljet-wc-tabs.php:314
+msgid "Enter your classification ID"
+msgstr "Ingrese su ID de clasificación"
+
+#: includes/admin/class-paljet-wc-tabs.php:239
+#: includes/admin/class-paljet-wc-tabs.php:324
+msgid "Client ID"
+msgstr "ID del Cliente"
+
+#: includes/admin/class-paljet-wc-tabs.php:245
+#: includes/admin/class-paljet-wc-tabs.php:330
+msgid "Enter your client ID"
+msgstr "Ingrese su ID de Cliente"
+
+#: includes/admin/class-paljet-wc-tabs.php:247
+msgid "Client CUIT"
+msgstr "CUIT del Cliente"
+
+#: includes/admin/class-paljet-wc-tabs.php:253
+msgid "Enter your client CUIT"
+msgstr "Ingrese su CUIT de Cliente"
+
+#: includes/admin/class-paljet-wc-tabs.php:255
+#: includes/admin/class-paljet-wc-tabs.php:332
+msgid "Ticket ID"
+msgstr "ID del Talonario"
+
+#: includes/admin/class-paljet-wc-tabs.php:261
+#: includes/admin/class-paljet-wc-tabs.php:338
+msgid "Enter your ticket ID"
+msgstr "Ingrese su ID del talonario"
+
+#: includes/admin/class-paljet-wc-tabs.php:263
+msgid "Shipping ID"
+msgstr "ID del Envío"
+
+#: includes/admin/class-paljet-wc-tabs.php:269
+msgid "Enter your shipping ID"
+msgstr "Ingrese su ID del envío"
+
+#: includes/admin/class-paljet-wc-tabs.php:271
+msgid "Shipping Code"
+msgstr "Código del Envío"
+
+#: includes/admin/class-paljet-wc-tabs.php:277
+msgid "Enter your shipping Code"
+msgstr "Ingrese su código del envío"
+
+#: includes/admin/class-paljet-wc-tabs.php:316
+msgid "Voucher Classification ID"
+msgstr "ID de la Clasificación de Anticipo"
+
+#: includes/admin/class-paljet-wc-tabs.php:322
+msgid "Enter your voucher classification ID"
+msgstr "Ingrese su ID de clasificación de Anticipo"
+
+#: includes/admin/class-paljet-wc-tabs.php:340
+msgid "Account ID"
+msgstr "ID de Cuenta"
+
+#: includes/admin/class-paljet-wc-tabs.php:346
+msgid "Enter your account ID"
+msgstr "Ingrese su ID de cuenta"
+
+#: includes/admin/class-paljet-wc-tabs.php:369
+msgid "Enable Logs"
+msgstr "Habilitar Logs"
+
+#: includes/admin/class-paljet-wc-tabs.php:376
+msgid "Logs content"
+msgstr "Contenido de Logs"
+
+#: includes/admin/class-paljet-wc-tabs.php:389
+msgid "Delete Logs"
+msgstr "Borras Logs"
+
+#: includes/admin/class-paljet-wc-tabs.php:390
+msgid "Delete Now"
+msgstr "Borrar Ahora"
+
+#: includes/admin/class-paljet-wc-tabs.php:400
+msgid "Additional Information"
+msgstr "Información Adicional"
+
+#: includes/admin/class-paljet-wc-tabs.php:405
+#: includes/admin/class-paljet-wc-tabs.php:406
+msgid "Variables"
+msgstr "Variables"
+
+#: includes/admin/class-paljet-wc-tabs.php:428
+msgid "Resources URL"
+msgstr "URL de Recursos"
+
+#: includes/admin/class-paljet-wc-tabs.php:431
+msgid "To download product images"
+msgstr "Para descargar imágenes del producto"
+
+#: includes/admin/class-paljet-wc-tabs.php:435
+#: includes/admin/class-paljet-wc-tabs.php:475
+msgid "Enter your URL"
+msgstr "Ingrese su URL"
+
+#: includes/admin/class-paljet-wc-tabs.php:437
+msgid "Brand Attribute"
+msgstr "Atributo Marca"
+
+#: includes/admin/class-paljet-wc-tabs.php:445
+msgid "Products Limit to Sync"
+msgstr "Límite de productos a sincronizar"
+
+#: includes/admin/class-paljet-wc-tabs.php:453
+msgid "Enable Deltas"
+msgstr "Habilitar Deltas"
+
+#: includes/admin/class-paljet-wc-tabs.php:459
+#, php-format
+msgid "Check for newly updated products every %d secs."
+msgstr "Revisar recientes productos actualizados cada %d segundos."
+
+#: includes/admin/class-paljet-wc-tabs.php:464
+msgid "Login"
+msgstr "Conectarse"
+
+#: includes/admin/class-paljet-wc-tabs.php:469
+msgid "URL"
+msgstr "URL"
+
+#: includes/admin/class-paljet-wc-tabs.php:477
+msgid "User"
+msgstr "Usuario"
+
+#: includes/admin/class-paljet-wc-tabs.php:483
+msgid "Enter your user"
+msgstr "Ingrese su usuario"
+
+#: includes/admin/class-paljet-wc-tabs.php:485
+msgid "Password"
+msgstr "Clave"
+
+#: includes/admin/class-paljet-wc-tabs.php:491
+msgid "Enter your password"
+msgstr "Ingrese su clave"
+
+#: includes/class-paljet-cron.php:124
+#, php-format
+msgid "Every %d secs"
+msgstr "Cada %d segs"
+
+#: includes/class-paljet-cron.php:145
+msgid "Every 10 minutes"
+msgstr "Cada 10 minutos"
+
+#: includes/class-paljet-logs.php:99
+msgid "new product"
+msgstr "nuevo producto"
+
+#: includes/class-paljet-logs.php:100 includes/class-paljet-logs.php:102
+msgid "update product"
+msgstr "producto actualizado"
+
+#: includes/class-paljet-logs.php:101
+msgid "sync images"
+msgstr "sincronizar imágenes"
+
+#: includes/class-paljet-logs.php:107 includes/class-paljet-logs.php:109
+msgid "online mode"
+msgstr "modo online"
+
+#: includes/class-paljet-logs.php:108
+msgid "manual mode"
+msgstr "modo manual"
+
+#: includes/class-paljet-wc-attributes.php:44
+#, php-format
+msgid "Creating Attributes : %s ( attribute : %s )"
+msgstr "Creando Attributos : %s ( attributo : %s )"
+
+#: includes/class-paljet-wc-orders.php:152
+#, php-format
+msgid "Paljet Order ID %s ( Gateway : %s )"
+msgstr "Paljet Pedido ID %s ( Pasarela : %s )"
+
+#: includes/class-paljet-wc-orders.php:160
+#, php-format
+msgid "Paljet Order Error : %s ( Gateway : %s )"
+msgstr "Paljet Pedido Error : %s ( Pasarela : %s )"
+
+#: includes/class-paljet-wc-orders.php:171
+#, php-format
+msgid "Paljet Voucher ID %s ( Gateway : %s )"
+msgstr "Paljet Anticipo ID %s ( Pasarela : %s )"
+
+#: includes/class-paljet-wc-orders.php:179
+#, php-format
+msgid "Paljet Voucher Error : %s ( Gateway : %s )"
+msgstr "Paljet Voucher Error : %s ( Pasarela : %s )"
+
+#: includes/class-paljet.php:36 includes/class-paljet.php:43
+msgid "Cheatin&#8217; huh?"
+msgstr "Traición, eh?"
+
+#: includes/class-paljet.php:123
+#, php-format
+msgid ""
+"Woocommerce Paljet Integration plugin depends on the last version of %s to "
+"work!"
+msgstr ""
+"WooCommerce Paljet Integración depende de la última version de %s para "
+"funcionar!"
+
+#: includes/class-paljet.php:127
+msgid ""
+"Woocommerce Paljet Integration plugin needs the currency in the commerce be "
+"ARS to work!"
+msgstr ""
+"WooCommerce Paljet Integración necesita que la moneda del comercio sea ARS "
+"para funcionar!"
+
+#: includes/functions.php:50
+msgid "Choose your attribute"
+msgstr "Elige tu atributo"
+
+#: includes/functions.php:69
+msgid "No prices lists"
+msgstr "No hay lista de precios"
+
+#: includes/functions.php:71
+msgid "Choose your price list"
+msgstr "Elige tu lista de precio"
+
+#: includes/functions.php:181
+#, php-format
+msgid "Pending images : download image %s"
+msgstr "Imágenes pendientes : descargar imagen %s"
+
+#: includes/functions.php:197
+#, php-format
+msgid "Pending images : storing image %s"
+msgstr "Imágenes Pendientes : guardando imagen %s"
+
+#: includes/syncs/class-paljet-brands.php:18
+msgid "Start brands sync"
+msgstr "Inicio sincronización de las marcas"
+
+#: includes/syncs/class-paljet-brands.php:29
+#, php-format
+msgid "The \"%s\" attribute doesnt exists"
+msgstr "El atributo \"%s\" no existe"
+
+#: includes/syncs/class-paljet-brands.php:34
+msgid "Getting brands from the Paljet API"
+msgstr "Obteniendo marcas desde  la API de Paljet"
+
+#: includes/syncs/class-paljet-brands.php:47
+msgid "There is not brands"
+msgstr "No hay marcas"
+
+#: includes/syncs/class-paljet-brands.php:52
+#, php-format
+msgid "%s brands ready to import"
+msgstr "%s marcas listas para importar"
+
+#: includes/syncs/class-paljet-brands.php:74
+#, php-format
+msgid "Synced brands : %s"
+msgstr "Marcas sincronizadas : %s"
+
+#: includes/syncs/class-paljet-brands.php:79
+msgid "End brands sync"
+msgstr "Fin Sincronizar Marcas"
+
+#: includes/syncs/class-paljet-brands.php:102
+#, php-format
+msgid "Updating the brand %s ( ID: %s )"
+msgstr "Actualizando la marca %s ( ID: %s )"
+
+#: includes/syncs/class-paljet-brands.php:121
+#, php-format
+msgid "Inserting the brand %s"
+msgstr "Insertando la marca %s"
+
+#: includes/syncs/class-paljet-brands.php:175
+#, php-format
+msgid "Creating the brand %s"
+msgstr "Creando la marca %s"
+
+#: includes/syncs/class-paljet-categories.php:19
+msgid "Start categories sync"
+msgstr "Inicio Sync Categorías"
+
+#: includes/syncs/class-paljet-categories.php:23
+msgid "Woocommerce Category Taxonomy doesnt exists"
+msgstr "WooCommerce Taxonomy no existe"
+
+#: includes/syncs/class-paljet-categories.php:28
+msgid "Getting categories from the Paljet API"
+msgstr "Obteniendo categorías desde la API de Paljet"
+
+#: includes/syncs/class-paljet-categories.php:41
+msgid "There is not categories"
+msgstr "No hay categorias"
+
+#: includes/syncs/class-paljet-categories.php:46
+msgid "Categories ready to import"
+msgstr "Categorias listas para importar"
+
+#: includes/syncs/class-paljet-categories.php:57
+#, php-format
+msgid "Synced categories : %s"
+msgstr "Categorías sincronizadas : %s"
+
+#: includes/syncs/class-paljet-categories.php:62
+msgid "End categories sync"
+msgstr "Fin Sync de categorias"
+
+#: includes/syncs/class-paljet-categories.php:97
+#, php-format
+msgid "Updating the %s category ( ID: %s )"
+msgstr "Actualizando la categoria %s ( ID: %s )"
+
+#: includes/syncs/class-paljet-categories.php:124
+#, php-format
+msgid "Inserting the %s category"
+msgstr "Insertando la categoría %s"
+
+#: includes/syncs/class-paljet-deltas.php:20
+msgid "Delta Stock : Start"
+msgstr "Delta Stock: Inicio"
+
+#: includes/syncs/class-paljet-deltas.php:26
+msgid "Warehouses are not defined on the settings"
+msgstr "Almacenes no están definidos en los ajustes"
+
+#: includes/syncs/class-paljet-deltas.php:53
+msgid "Delta Stock : Finish ( There is not deltas stock )"
+msgstr "Delta Stock : Fin ( No hay deltas stock )"
+
+#: includes/syncs/class-paljet-deltas.php:71
+#, php-format
+msgid "Delta Stock : Finish ( processed : %d )"
+msgstr "Delta Stock : Fin ( Procesados : %d )"
+
+#: includes/syncs/class-paljet-deltas.php:88
+msgid "Delta Price : Start"
+msgstr "Delta Precio : Inicio"
+
+#: includes/syncs/class-paljet-deltas.php:94
+msgid "Regular price are not defined on the settings"
+msgstr "Precio regular no está definido en los ajustes"
+
+#: includes/syncs/class-paljet-deltas.php:127
+msgid "Delta Prices : Finish ( There is not deltas prices )"
+msgstr "Delta Precios : Fin ( No hay Delta Precios )"
+
+#: includes/syncs/class-paljet-deltas.php:147
+#, php-format
+msgid "Delta Prices : Finish ( processed : %d )"
+msgstr "Delta Precio : Fin ( Procesados : %d )"
+
+#: includes/syncs/class-paljet-deltas.php:164
+msgid "Delta Products : Start"
+msgstr "Delta Productos : Inicio"
+
+#: includes/syncs/class-paljet-deltas.php:170
+msgid "Sale price are not defined on the settings"
+msgstr "Precio de oferta no está definido en los ajustes"
+
+#: includes/syncs/class-paljet-deltas.php:195
+msgid "Delta Products : Finish ( There is not deltas products )"
+msgstr "Delta productos : Fin ( No hay Delta productos )"
+
+#: includes/syncs/class-paljet-deltas.php:215
+#, php-format
+msgid "Delta Products : Finish ( processed : %d )"
+msgstr "Delta Productos : Fin ( procesados : %d )"
+
+#: includes/syncs/class-paljet-orders.php:27
+#, php-format
+msgid "Send Order : Start ( WC Order %d )"
+msgstr "Enviar Pedido : Inicio ( WC Pedido %d )"
+
+#: includes/syncs/class-paljet-orders.php:37
+msgid ""
+"Send Order : You have to fill the information in the orders tab on the "
+"Paljet settings"
+msgstr ""
+"Enviar Pedido : Debes llenar la información en la pestaña de pedidos en los "
+"ajustes de Paljet"
+
+#: includes/syncs/class-paljet-orders.php:168
+#: includes/syncs/class-paljet-orders.php:169
+#: includes/syncs/class-paljet-vouchers.php:102
+#: includes/syncs/class-paljet-vouchers.php:103
+msgid "Reply ID is not exist or is not numeric"
+msgstr "Respuesta ID no existe o no es numérico"
+
+#: includes/syncs/class-paljet-orders.php:176
+#, php-format
+msgid "Send Order : Finish ( WC Order %d )"
+msgstr "Enviar Pedido : Fin ( WC Order %d )"
+
+#: includes/syncs/class-paljet-prices.php:16
+msgid "Start prices lists sync"
+msgstr "Inicio sync de lista de precios"
+
+#: includes/syncs/class-paljet-prices.php:18
+msgid "Getting prices lists from the Paljet API"
+msgstr "Obteniendo lista de precios desde la API de Paljet"
+
+#: includes/syncs/class-paljet-prices.php:32
+msgid "There is not prices lists"
+msgstr "No hay listas de precios"
+
+#: includes/syncs/class-paljet-prices.php:37
+#, php-format
+msgid "%s prices lists ready to import"
+msgstr "Lista de precio %s lista para importar"
+
+#: includes/syncs/class-paljet-prices.php:56
+#, php-format
+msgid "Synced prices lists : %s"
+msgstr "Lista de precio sincronizada : %s"
+
+#: includes/syncs/class-paljet-prices.php:61
+msgid "End prices lists sync"
+msgstr "Fin sync de lista de precios"
+
+#: includes/syncs/class-paljet-products.php:42
+#, php-format
+msgid "Sync Product : Start ( current page : %d )"
+msgstr "Sincronización de Productos: Inicio ( página actual : %d )"
+
+#: includes/syncs/class-paljet-products.php:52
+#: includes/syncs/class-paljet-products.php:303
+msgid "Getting products from the Paljet API"
+msgstr "Obteniendo productos desde la API de Paljet"
+
+#: includes/syncs/class-paljet-products.php:80
+#: includes/syncs/class-paljet-products.php:330
+msgid "There is not products"
+msgstr "No hay productos"
+
+#: includes/syncs/class-paljet-products.php:85
+#, php-format
+msgid "%s products ready to import"
+msgstr "%s productos listos para importar"
+
+#: includes/syncs/class-paljet-products.php:114
+#, php-format
+msgid "Sync Product : End ( Processed : %d )"
+msgstr "Sincronización de Productos : Fin ( Procesados: %d )"
+
+#: includes/syncs/class-paljet-products.php:143
+#, php-format
+msgid "Note field has an incorrect structure ( Paljet ID: %s )"
+msgstr "Campo nota tiene una incorrecta estructura ( Paljet ID: %s )"
+
+#: includes/syncs/class-paljet-products.php:154
+#, php-format
+msgid "Note field has empty variations ( Paljet ID: %s )"
+msgstr "Campo nota tiene variaciones vacías ( Paljet ID: %s )"
+
+#: includes/syncs/class-paljet-products.php:298
+msgid "Start products total page"
+msgstr "Inicio total de páginas de productos"
+
+#: includes/syncs/class-paljet-products.php:445
+#, php-format
+msgid "Saving the variable product %s ( Paljet ID: %s )"
+msgstr "Guardando el producto variable %s ( Paljet ID: %s )"
+
+#: includes/syncs/class-paljet-products.php:462
+#: includes/syncs/class-paljet-products.php:770
+#, php-format
+msgid ""
+"This product has the same title that those ids [ %s ] ( WC ID: %d, Paljet "
+"ID: %d )"
+msgstr ""
+"Este producto tiene el mismo título que estos ids [ %s ] ( WC ID: %d, Paljet "
+"ID: %d )"
+
+#: includes/syncs/class-paljet-products.php:585
+#, php-format
+msgid "Saving the variation %s ( Paljet ID: %s )"
+msgstr "Guardando la variación %s ( Paljet ID: %s )"
+
+#: includes/syncs/class-paljet-products.php:751
+#, php-format
+msgid "Saving the simple product %s ( Paljet ID: %s )"
+msgstr "Guardando el producto simple %s ( Paljet ID: %s )"
+
+#: includes/syncs/class-paljet-products.php:862
+#, php-format
+msgid "No exists the prices lists node on the API response ( Paljet ID : %d )"
+msgstr ""
+"No existe el nodo de listas de precios en la respuesta de la API ( Paljet "
+"ID: %d )"
+
+#: includes/syncs/class-paljet-products.php:908
+#, php-format
+msgid "No exists the stock node on the API response ( Paljet ID : %d )"
+msgstr "No existe el nodo de stock en la respuesta de la API ( Paljet ID: %d )"
+
+#: includes/syncs/class-paljet-products.php:958
+#, php-format
+msgid "Creating the product tag %s"
+msgstr "Creando la etiqueta %s"
+
+#: includes/syncs/class-paljet-products.php:996
+#, php-format
+msgid "No exists the brand node on the API response ( Paljet ID : %d )"
+msgstr "No existe el nodo marca en la respuesta de la API ( Paljet ID: %d )"
+
+#: includes/syncs/class-paljet-products.php:1025
+#, php-format
+msgid ""
+"There was a problem getting the brand term in WooCommerce ( Product ID : %d )"
+msgstr ""
+"Hubo un problema obteniendo el término de la marca en WooCommerce ( Product "
+"ID : %d )"
+
+#: includes/syncs/class-paljet-products.php:1133
+#, php-format
+msgid "Set Pending Products : Start ( total : %d ) [includes blank]"
+msgstr ""
+"Asignar Productos Pendientes: Inicio ( total : %d ) [ Incluye blancos ]"
+
+#: includes/syncs/class-paljet-products.php:1153
+#, php-format
+msgid "Data from Paljet Product has no a valid structure ( Paljet ID : %d )"
+msgstr ""
+"Información desde Paljet tiene una incorrecta estructura ( Paljet ID: %d )"
+
+#: includes/syncs/class-paljet-products.php:1174
+#, php-format
+msgid "Set Pending Products : End ( Processed : %d, Missing : %d )"
+msgstr "Asignar Productos Pendientes: Fin ( Procesados : %d, Faltantes : %d )"
+
+#: includes/syncs/class-paljet-products.php:1183
+#, php-format
+msgid "Set Pending Products : End ( Processed : %d )"
+msgstr "Asignar Productos Pendientes: Fin ( Procesados : %d )"
+
+#: includes/syncs/class-paljet-products.php:1205
+msgid "Complete Pending Products : Start"
+msgstr "Completar productos pendientes : Inicio"
+
+#: includes/syncs/class-paljet-products.php:1246
+#, php-format
+msgid "Error in request from API ( Paljet ID : %d )"
+msgstr "Error en solicitud desde la API ( Paljet ID : %d)"
+
+#: includes/syncs/class-paljet-products.php:1286
+#, php-format
+msgid ""
+"Product has no anymore publica_web set to true ( Paljet ID : %d ). Stock to "
+"0 and hided"
+msgstr ""
+"Producto no tiene más publica_web en true ( Paljet ID : %d ). Stock a 0 y "
+"ocultado"
+
+#: includes/syncs/class-paljet-products.php:1292
+#, php-format
+msgid "Product not found ( Paljet ID : %d ). Deleted"
+msgstr "Producto no encontrado ( Paljet ID : %d). Borrado"
+
+#: includes/syncs/class-paljet-products.php:1329
+#: includes/syncs/class-paljet-products.php:1337
+#, php-format
+msgid "Complete Pending Products : End ( Processed : %d )"
+msgstr "Completar Productos Pendientes: Fin ( Procesados : %d )"
+
+#: includes/syncs/class-paljet-resources.php:28
+msgid "Sync Resources : Start"
+msgstr "Sincronizar Recursos : Inicio"
+
+#: includes/syncs/class-paljet-resources.php:34
+#, php-format
+msgid "There is not a bucket id ( WC ID : %d )"
+msgstr "No hay un bucket id  ( WC ID : %d )"
+
+#: includes/syncs/class-paljet-resources.php:111
+msgid "Sync Resources : Fin"
+msgstr "Sincronizar Recursos : Fin"
+
+#: includes/syncs/class-paljet-resources.php:138
+#, php-format
+msgid "Remote Resources : remote request to %s bucket ( %s )"
+msgstr "Remote recursos : solicitud para %s bucket ( %s )"
+
+#: includes/syncs/class-paljet-resources.php:153
+#, php-format
+msgid ""
+"Remote Resources : the content node to %s bucket is not in the product "
+"resource ( %s )"
+msgstr ""
+
+#: includes/syncs/class-paljet-resources.php:266
+#, php-format
+msgid "Process Pending Resources : it has not a bucket_id ( Paljet ID : %s )"
+msgstr "Proceso de Recursos Pendientes : no tiene un bucket_id ( Paljet : %s )"
+
+#: includes/syncs/class-paljet-resources.php:313
+#, php-format
+msgid "Pending Resources : it has not a bucket_id ( Paljet ID : %s )"
+msgstr "Recurso Pendiente: no tiene un bucket_id ( Paljet ID: %s )"
+
+#: includes/syncs/class-paljet-resources.php:377
+#, php-format
+msgid "Set Pending Images : Start ( total : %d )"
+msgstr "Asignar Imágenes Pendientes: Inicio ( total : %d )"
+
+#: includes/syncs/class-paljet-resources.php:395
+#, php-format
+msgid "Set Pending Images : It is not a WC product ( WC Product ID: %d )"
+msgstr ""
+"Asignar Imágenes Pendientes: No es un WC Producto ( WC Producto ID: %d )"
+
+#: includes/syncs/class-paljet-resources.php:439
+#, php-format
+msgid "Set Pending Images: Saving the product ( WC Product ID: %s )"
+msgstr ""
+
+#: includes/syncs/class-paljet-resources.php:466
+#, php-format
+msgid "Set Pending Images : End ( Processed : %d, Missing : %d )"
+msgstr "Asignar Productos Pendientes: Fin ( Procesados : %d, Faltantes : %d )"
+
+#: includes/syncs/class-paljet-resources.php:475
+#, php-format
+msgid "Set Pending Images : End ( Processed : %d )"
+msgstr ""
+
+#: includes/syncs/class-paljet-resources.php:497
+#, php-format
+msgid "Set Pending Resources : Start ( total : %d )"
+msgstr ""
+
+#: includes/syncs/class-paljet-resources.php:572
+#, php-format
+msgid "Set Pending Resources : End ( Processed : %d, Missing : %d )"
+msgstr "Asignar Productos Pendientes: Fin ( Procesados : %d, Faltantes : %d )"
+
+#: includes/syncs/class-paljet-resources.php:581
+#, php-format
+msgid "Set Pending Resources : End ( Processed : %d )"
+msgstr ""
+
+#: includes/syncs/class-paljet-vouchers.php:33
+#, php-format
+msgid "Send Voucher : Start ( WC Order %d )"
+msgstr "Enviar Anticipo : Inicio ( WC Pedido %d )"
+
+#: includes/syncs/class-paljet-vouchers.php:42
+msgid ""
+"Send Voucher : You have to fill the information in the voucher tab on the "
+"Paljet settings"
+msgstr ""
+"Enviar Anticipo : Debes llenar la información en la pestaña de anticipos en "
+"los ajustes de Paljet"
+
+#: includes/syncs/class-paljet-vouchers.php:50
+msgid "The card ID is empty"
+msgstr ""
+
+#: includes/syncs/class-paljet-vouchers.php:110
+#, php-format
+msgid "Send Voucher : Finish ( WC Order %d )"
+msgstr "Enviar Voucher : Fin ( WC Order %d )"
+
+#: includes/syncs/class-paljet-warehouses.php:18
+msgid "Start warehouses sync"
+msgstr "Inicio Sync Almacenes"
+
+#: includes/syncs/class-paljet-warehouses.php:21
+msgid "Getting warehouses from the Paljet API"
+msgstr ""
+
+#: includes/syncs/class-paljet-warehouses.php:34
+msgid "There is not warehouses"
+msgstr "No hay almacenes"
+
+#: includes/syncs/class-paljet-warehouses.php:39
+#, php-format
+msgid "%s warehouses ready to import"
+msgstr "%s almacenes listos para importar"
+
+#: includes/syncs/class-paljet-warehouses.php:56
+#, php-format
+msgid "Synced warehouses : %s"
+msgstr "Almacenes sincronizados : %s"
+
+#: includes/syncs/class-paljet-warehouses.php:61
+msgid "End warehouses sync"
+msgstr "Fin Sync Almacenes"
+
+#: includes/wp-license/class-erpwoosync-license.php:28
+msgid "Wrong information"
+msgstr "Mala Información"
+
+#: includes/wp-license/class-erpwoosync-license.php:79
+msgid "Manager Licenses"
+msgstr "Administrar Licencias"
+
+#: includes/wp-license/class-erpwoosync-license.php:188
+#: includes/wp-license/class-erpwoosync-license.php:202
+#: includes/wp-license/class-erpwoosync-license.php:591
+msgid "There was a problem checking the license"
+msgstr "Hubo un problema revisando la licencia"
+
+#: includes/wp-license/class-erpwoosync-license.php:197
+#: includes/wp-license/class-erpwoosync-license.php:258
+#: includes/wp-license/class-erpwoosync-license.php:513
+#: includes/wp-license/class-erpwoosync-license.php:600
+msgid "There was a problem establishing a connection to the API server"
+msgstr ""
+
+#: includes/wp-license/class-erpwoosync-license.php:228
+msgid "Server is down right. An email was sent to "
+msgstr ""
+
+#: includes/wp-license/class-erpwoosync-license.php:231
+#, php-format
+msgid "ERPWooSync is down right (from %s) - Activating"
+msgstr ""
+
+#: includes/wp-license/class-erpwoosync-license.php:253
+msgid "There was a problem activating the license"
+msgstr ""
+
+#: includes/wp-license/class-erpwoosync-license.php:388
+msgid "An error occour when try to identify the plugin."
+msgstr ""
+
+#: includes/wp-license/class-erpwoosync-license.php:388
+#: includes/wp-license/class-erpwoosync-license.php:394
+msgid "Try again"
+msgstr ""
+
+#: includes/wp-license/class-erpwoosync-license.php:394
+msgid "An Unexpected HTTP Error occurred during the API request."
+msgstr ""
+
+#: includes/wp-license/class-erpwoosync-license.php:439
+#: includes/wp-license/class-erpwoosync-license.php:539
+msgid "The license is missing"
+msgstr ""
+
+#: includes/wp-license/class-erpwoosync-license.php:459
+#: includes/wp-license/class-erpwoosync-license.php:559
+msgid "ERPWooSync is down right"
+msgstr ""
+
+#: includes/wp-license/class-erpwoosync-license.php:475
+msgid "Licence key is active to this domain"
+msgstr "La licencia esta activo para este dominio"
+
+#: includes/wp-license/class-erpwoosync-license.php:481
+msgid "Licence key is unassigned"
+msgstr "Licencia está desvinculada"
+
+#: includes/wp-license/class-erpwoosync-license.php:485
+#: includes/wp-license/class-erpwoosync-license.php:574
+msgid "Licence key is missing"
+msgstr "No hay licencia"
+
+#: includes/wp-license/class-erpwoosync-license.php:501
+msgid ""
+"There was a problem checking the license. This license does not correspond "
+"to this website."
+msgstr ""
+
+#: includes/wp-license/class-erpwoosync-license.php:571
+msgid "Licence key successfully unassigned"
+msgstr "Licencia fue desvinculada correctamente"
+
+#: includes/wp-license/class-erpwoosync-license.php:649
+msgid "Unassign from this website"
+msgstr "Desvincular desde esta web"
+
+#: includes/wp-license/layouts/html-box-license.php:6
+msgid "Please enter your license code"
+msgstr "Por favor ingrese su código de licencia"
+
+#: includes/wp-license/layouts/html-box-license.php:19
+msgid "License Code"
+msgstr ""
+
+#: includes/wp-license/layouts/html-box-license.php:21
+msgid "Submit"
+msgstr ""
+
+#: includes/wp-license/layouts/html-box-license.php:25
+#: includes/wp-license/layouts/html-popup-license.php:12
+msgid "Where do I find my License Code?"
+msgstr "Dónde puedo encontrar mi licencia?"
+
+#: includes/wp-license/layouts/html-box-license.php:26
+#: includes/wp-license/layouts/html-popup-license.php:16
+msgid "Manager License from your site"
+msgstr ""
+
+#: includes/wp-license/layouts/html-popup-license.php:2
+msgid "Close Popup"
+msgstr "Cerra popup"
+
+#: includes/wp-license/layouts/html-popup-license.php:3
+msgid "License Status"
+msgstr "Estado de la licencia"
+
+#: resources/layouts/admin/product_history.php:3
+msgid "Empty history"
+msgstr "Histórico vacío"
+
+#: resources/layouts/admin/table_additional.php:9
+msgid "Max execution time"
+msgstr "Máximo tiempo de ejecución"
+
+#: resources/layouts/admin/table_additional.php:10
+#, php-format
+msgid "%d secs"
+msgstr "%d segs"
+
+#~ msgid "Advanced"
+#~ msgstr "Avanzado"
+
+#~ msgid "Every 5 minutes"
+#~ msgstr "Cada 5 minutos"
+
+#~ msgid "Every 3 minutes"
+#~ msgstr "Cada 3 minutos"
+
+#~ msgid "There is not deltas products"
+#~ msgstr "No hay deltas productos"
+
+#, php-format
+#~ msgid "The variation %s ( Paljet ID: %s ) has not a good note field"
+#~ msgstr "La variación %s ( Paljet ID: %s ) no tiene un buen campo nota"
+
+#, php-format
+#~ msgid "The variation %s ( Paljet ID: %s ) has his variations empty"
+#~ msgstr "La variación %s ( Paljet ID: %s ) tiene variaciones vacías"
+
+#, php-format
+#~ msgid "No exists the category node on the API response ( Paljet ID : %d )"
+#~ msgstr ""
+#~ "No existe el nodo categoría en la respuesta del API ( Paljet ID : %d )"
+
+#, php-format
+#~ msgid "You have %d categories pending to sync"
+#~ msgstr "Tenes %d categorías pendientes de sincronizar"

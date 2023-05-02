@@ -1,0 +1,174 @@
+<?php
+/**
+ * Voucher Class
+ * @since  1.0.0
+ * @package Public / Voucher
+ */
+ //Estas relaciones se modifican segun el cliente que integra el plugin
+ class Paljet_Vouchers {
+
+	public static $cards = [
+		1 => 'Mastercard',
+		2 => 'Visa',
+		3 => 'Maestro',
+		4 => 'Kadikard',
+		5 => 'Naranja',
+		6 => 'Visa Debito',
+		7 => 'Cordobesa',
+		8 => 'Nativa',
+		9 => 'Mastercad Nacion',
+		10 => 'Visa Nacion',
+		12 => 'Visa Macro',
+		13 => 'Mastercard Macro',
+		16 => 'Cabal Debito',
+		18 => 'Cabal Credito',
+		19 => 'Mercado Pago',
+		20 => 'Amex',
+		21 => 'Amex Debito',
+	];
+
+	/**
+	 * Send Vouchers
+	 * @param  class $order
+	 * @return mixed
+	 */
+	public static function send( $order, $data = [] ) {
+		global $PaljetApi;
+
+		Paljet_Logs::add( 'notice', sprintf(
+			esc_html__( 'Send Voucher : Start ( WC Order %d )', 'paljet' ),
+			$order->get_id()
+		) );
+
+		// Get settings
+		$settings = get_option( 'paljet_settings', [] );
+
+		if( !isset( $settings['enable_vouchers'] ) || empty( $settings['enable_vouchers'] ) ) {
+			Paljet_Logs::add( 'error', 
+				esc_html__( 'Send Voucher : You have to fill the information in the voucher tab on the Paljet settings', 'paljet' )
+			);
+		}
+
+		// Get Card ID
+		$card_id = self::get_card_id( $order, $data );
+
+		if( empty( $card_id ) )
+			return [ 'status' => 'error', 'response' => esc_html__( 'The card ID is empty', 'paljet' ) ];
+
+
+		$args_voucher = apply_filters( 'paljet/vouchers/send/params', [
+			'fecha_emision'		=> date( 'Y-m-d\TH:i:s.v' ),
+			'fecha_hora_alta'	=> date( 'Y-m-d\TH:i:s.v' ),
+			'fecha_venc'		=> date( 'Y-m-d\TH:i:s.v', strtotime( '+1 month' ) ),
+			'ant_clasif_id'		=> absint( $settings['voucher_classification_id_2'] ),
+			'cli_id'			=> absint( $settings['voucher_client_id'] ),
+			'cpr_clasif_id'		=> absint( $settings['voucher_classification_id'] ),
+			'cuit'				=> strval( $settings['client_cuit'] ),
+			'domicilio'			=> $order->get_billing_address_1(),
+			'localidad_id'		=> 0,
+			'monto'				=> $order->get_total(),
+			'nota'				=> $order->get_customer_note(),
+			'observacion'		=> '',
+			'pto_vta'			=> absint( $settings['voucher_sale_id'] ),
+			'razon_social'		=> $order->get_formatted_billing_full_name(),
+			'tal_id'			=> absint( $settings['voucher_ticket_id'] ),
+			'telefono'			=> $order->get_billing_phone(),
+			
+			
+			'valores'			=> [[
+				'fecha_venc'		=> date( 'Y-m-d\TH:i:s.v', strtotime( '+1 month' ) ),
+				'cant_cuotas'		=> 1,
+				'cta_id'			=> absint( $settings['voucher_account_id'] ),
+				'moneda_id'			=> 1,
+				'monto'				=> $order->get_total(),
+				'monto_operacion'	=> $order->get_total(),
+				'nro_tarjeta'		=> '',
+				'tarjeta_id'		=> $card_id,
+				'titular'			=> $order->get_formatted_billing_full_name(),
+				'val_tipo_id'		=> 2,
+			]],
+		], $order );
+
+		// Get Products from ERP Paljet
+		try {
+			$request = $PaljetApi->Vouchers->post( $args_voucher );
+		} catch (Exception $e) {
+			Paljet_Logs::add( 'error', $e->getMessage() );
+			return [ 'status' => 'error', 'response' => $e->getMessage() ];
+		}
+
+		// Check if there was an error
+		if( isset( $request->estado ) && $request->estado == 400 ) {
+			Paljet_Logs::add( 'error', $request->detalle );
+			return [ 'status' => 'error', 'response' => $request->detalle ];
+		}
+
+		// Check if there is reply from the Paljet API
+		if( ! isset( $request->cprId ) || ! is_numeric( $request->cprId ) ) {
+			Paljet_Logs::add( 'error', esc_html__( 'Reply ID is not exist or is not numeric', 'paljet' ) );
+			return [ 'status' => 'error', 'response' => esc_html__( 'Reply ID is not exist or is not numeric', 'paljet' ) ];
+		}
+
+		// Save meta value
+		update_post_meta( $order->get_id(), 'paljet_voucher_id', absint( $request->cprId ) );
+		
+		Paljet_Logs::add( 'notice', sprintf(
+			esc_html__( 'Send Voucher : Finish ( WC Order %d )', 'paljet' ),
+			$order->get_id()
+		) );
+
+		return [ 'status' => 'ok', 'response' => absint( $request->cprId ) ];
+	}
+
+
+	/**
+	 * Get Card ID
+	 * @param  WC_ORDER $order
+	 * @return mixed
+	 */
+	public static function get_card_id( $order, $data = [] ) {
+
+		// Payment method
+		switch( $order->get_payment_method() ) {
+			case 'mobbex' :
+
+				if( ! isset( $data['payment']['source'] ) || empty( $data['payment']['source'] ) ) break;
+
+				$source = array_map( 'trim', $data['payment']['source'] );
+
+				if( $source['type'] != 'card' )
+					break;
+
+				// Sanitize to comparison
+				$source_name = sanitize_key( $source['name'] );
+
+				foreach( self::$cards as $card_id => $card_name ) {
+
+					// Sanitize to comparison
+					$card_name = sanitize_key( $card_name );
+
+					if( strpos( $source_name, $card_name ) === FALSE )
+						continue;
+						
+					$output_card_id = $card_id;
+					break;
+				}
+
+				break;
+
+			case 'woo-mercado-pago-basic':
+			case 'woo-mercado-pago-custom':
+			case 'woo-mercado-pago-ticket':
+				$output_card_id = 17;
+
+				break;
+
+			default: $output_card_id = 0;
+		}
+		
+
+		return $output_card_id;
+	}
+
+
+}

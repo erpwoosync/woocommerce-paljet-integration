@@ -1,0 +1,25 @@
+.attr-group {
+	display: block;
+	margin-bottom: 20px;
+	position: relative;
+}
+
+.attr-remove {
+	display: none;
+	text-decoration: none;
+	padding: 0 7px;
+	font-weight: bold;
+	font-size: 16px;
+	border-radius: 50%;
+	box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+}
+
+.attr-group:hover > .attr-remove {
+	color: red;
+	display: inline-block;
+}
+
+.attr-add {
+	clear: both;
+    margin-top: 10px;
+}

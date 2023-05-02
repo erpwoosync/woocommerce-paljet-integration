@@ -1,0 +1,92 @@
+2023-04-29 version 1.5.7
+* Fix: client cuit on the settings plugin
+
+2021-06-26 version 1.5.6
+* Fix: slug product name
+
+2021-06-15 version 1.5.5
+* Feature: License
+
+2021-01-20 version 1.5.4
+* Fix: product prices with taxes
+* Fix: card id from Mobbex
+* Feature: discount percent to each product
+
+2021-01-16 version 1.5.3
+* Fix: price with tax to product
+* Feature: clasific ID field in the settings
+
+2021-01-12 version 1.5.2
+* Feature : it calculates the card id in voucher process
+
+2020-12-22 version 1.5.1
+* Feature: voucher class
+
+2020-12-13 version 1.4.1
+* Fix: variation description always empty
+
+2020-10-21 version 1.4.0
+* Feature: send to orders to Paljet by API ( support bacs, cheque, cod, mp, mobbex )
+
+2020-10-15 version 1.3.1
+* Fix: remove tag from paljet alias
+* Feature : Compatible with WC 4.6.x
+
+2020-10-14 version 1.3.0
+* Feature: new method called "after variable product"
+* Fix: alias tags in variable product
+
+2020-10-08 version 1.2.9
+* Feature: paljet alias as a custom meta field
+
+2020-10-02 version 1.2.8
+* Fix: alias from paljet with separation
+
+2020-09-30 version 1.2.7
+* Fix : external plugin WC quantity, set the max variable to 0
+* Feature : loading product tag from alias Paljet
+* Fix: check if producto exists when complete information
+
+2020-09-25 version 1.2.6
+* Fix: complete task with new time intervale
+* Fix: put visible the product when it is updated
+
+2020-09-23 version 1.2.5
+* Fix: cron time to avoid duplicate products
+
+2020-09-22 version 1.2.4
+* Feature: history and duplicate message from sync product
+
+2020-09-16 version 1.2.3
+* Feature: Delta price is ready
+* Feature: hide product when it is no anymore publica_web in true
+
+2020-09-14 version 1.2.2
+* Fix: sql tables
+* Clean code
+
+2020-09-12 version 1.2.1
+* Fix: delete pending products if it is not pubica web in true
+* Fix: remove cron task when deactivate plugin
+* Fix: timezone to date on logs
+
+2020-09-11 version 1.2.0
+* Feature: Delta to stock and products
+
+2020-09-04 version 1.1.1
+* Fix: remove images
+
+2020-09-03 version 1.1.0
+* Feature : sync images button from paljet
+
+2020-08-31 version 1.0.2
+* Fix: duplicate attributes
+* Feature: translate
+
+2020-08-27 version 1.0.1
+* Fix: sku duplicate
+* Fix: Only 3 images to product
+* Fix: if resource is not exists, next
+
+2020-08-26 version 1.0.0
+* Ready

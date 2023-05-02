@@ -1,0 +1,586 @@
+<?php
+/**
+ * Resource Class
+ * @since  1.0.0
+ * @package Public / Resource
+ */
+class Paljet_Resources {
+
+	public static $PendingResources = [];
+
+	/**
+	 * Type ( manual/online )
+	 * @var text
+	 */
+	public static $type;
+
+	/*
+		Methods to sync
+	 */
+
+	public static function sync( $product_id = 0 ) {
+
+		if( empty( $product_id ) )
+			return false;
+
+		self::$type = 'manual';
+
+		Paljet_Logs::add( 'notice', esc_html__('Sync Resources : Start', 'paljet') );
+
+		$resource_id = get_post_meta( $product_id, 'paljet_resource_id', true );
+
+		if( empty( $resource_id ) ) {
+			Paljet_Logs::add( 'error', sprintf(
+				esc_html__('There is not a bucket id ( WC ID : %d )', 'paljet'),
+				$product_id
+			) );
+			return false;
+		}
+
+		$settings = get_option( 'paljet_settings', [] );
+
+		$resource = [
+			'bucket_id'		=> $resource_id,
+			'product_id'	=> $product_id,
+		];
+
+		$blocks = self::get_remote_resource( $settings['resources_url'], $resource );
+
+		if( $blocks === FALSE )
+			return false;
+
+		$output = '';
+		$Product = wc_get_product( $product_id );
+		
+		// if there is no images
+		if( count( $blocks ) == 0 ) {
+			$Product->set_image_id(0);
+			$Product->set_gallery_image_ids([]);
+			$product_id = $Product->save();
+
+			$output = '<a href="' . esc_url( get_edit_post_link( $product_id ) ) . '">' . $Product->get_image( 'thumbnail' ) . '</a>';
+
+			// History
+			Paljet_Logs::product_history( $product_id, self::$type, 'images' );
+
+			return $output;
+		}
+
+
+		$media_ids = [];
+		$media_images = paljet_get_images_from_media();
+
+		foreach( $blocks as $block ) {
+
+			// if the URL is in the media library
+			if( count( $media_images ) > 0 && in_array( $block['url'], $media_images) ) {
+				$media_ids[] = array_search( $block['url'] , $media_images );
+			
+			} else {
+				
+				// Upload the image to WP
+				$media_ids[] = paljet_upload_media(
+					$block['url'],
+					$block['content_type'],
+					$block['description']
+				);
+			}
+
+			if( count( $media_ids ) == 3 )
+				break;
+		}
+
+		// Principal image
+		if( isset( $media_ids[0] ) ) {
+			$Product->set_image_id( $media_ids[0] );
+			unset( $media_ids[0] );
+		}
+		
+		// If there are still values ​​inside the array
+		if( count( $media_ids ) > 0 )
+			$Product->set_gallery_image_ids( $media_ids );
+		else
+			$Product->set_gallery_image_ids( [] );
+
+		$product_id = $Product->save();
+
+		$output = '<a href="' . esc_url( get_edit_post_link( $product_id ) ) . '">' . $Product->get_image( 'thumbnail' ) . '</a>';
+
+
+		Paljet_Logs::add( 'notice', sprintf(
+			esc_html__('Sync Resources : Fin', 'paljet'),
+			$page
+		) );
+
+		// History
+		Paljet_Logs::product_history( $product_id, self::$type, 'images' );
+
+		return $output;
+	}
+
+
+	public static function get_remote_resource( $resource_url = '', $resource = [] ) {
+
+		// Get resource URL
+		$resources_url = sprintf(
+			'%s/api/buckets/%s/resources',
+			$resource_url,
+			$resource['bucket_id']
+		);
+
+		$request = wp_remote_get( esc_url_raw( $resources_url ), [ 'timeout' => 120 ] );
+		$code = wp_remote_retrieve_response_code( $request );
+
+		// If error
+		if( is_wp_error( $request ) ) {
+
+			Paljet_Logs::add( 'notice', sprintf(
+				esc_html__('Remote Resources : remote request to %s bucket ( %s )', 'paljet'),
+				$resource['bucket_id'],
+				get_the_title( $resource['product_id'] )
+			) );
+
+			Paljet_Logs::add( 'error', $request->get_error_message() );
+			return false;
+		}
+
+		$body = wp_remote_retrieve_body( $request );
+		$data = json_decode( $body );
+
+		// Is the content is no exists
+		if( ! isset( $data->content ) ) {
+			Paljet_Logs::add( 'error', sprintf(
+				esc_html__('Remote Resources : the content node to %s bucket is not in the product resource ( %s )', 'paljet'),
+				$resource['bucket_id'],
+				get_the_title( $resource['product_id'] )
+			) );
+			return false;
+		}
+
+		// If the content is empty
+		if( empty( $data->content ) )
+			return [];
+
+		$blocks = [];
+
+		// Get all
+		foreach( $data->content as $content ) {
+
+			if( ! isset( $content->orden ) ||
+				! isset( $content->url ) || empty( $content->url )
+			) {
+				continue;
+			}
+
+			$blocks[ intval( $content->orden ) ] = [
+				'content_type'	=> $content->content_type,
+				'description'	=> $content->descripcion,
+				'url'			=> esc_url( $content->url ),
+			];
+		}
+
+		// sort the resources by key
+		if( count( $blocks ) > 0 ) 
+			ksort( $blocks );
+
+		return $blocks;
+	}
+
+
+
+	/*
+		Methods to pending images
+	 */
+
+	public static function get_pending_images() {
+
+		global $wpdb;
+		$table = $wpdb->prefix . 'paljet_images';
+
+		$query = 'SELECT * FROM ' . $table;
+		$results = $wpdb->get_results( $query, ARRAY_A );
+
+		return $wpdb->num_rows > 0 ? $results : [];
+	}
+
+	public static function save_pending_images( $ImagesUpload = [] ) {
+
+		if( count( $ImagesUpload ) == 0 )
+			return;
+
+		global $wpdb;
+
+		$ivalues = [];
+		$table = $wpdb->prefix . 'paljet_images';
+		
+		foreach( $ImagesUpload as $formatInsert ) {
+			$ivalues[] = $wpdb->prepare(
+							'(%d,%s,%s,%s,%s)',
+							$formatInsert['product_id'],
+							$formatInsert['image_url'],
+							$formatInsert['image_desc'],
+							$formatInsert['image_format'],
+							current_time( 'mysql' )
+						);
+		}
+		
+		$sql = "INSERT IGNORE INTO
+							".$table."
+								( product_id, image_url, image_desc, image_format, date_create )
+							VALUES
+								".implode(",",$ivalues);
+
+		$results = $wpdb->query( $sql );
+
+		return true;
+	}
+
+	public static function delete_pending_images( $id = null ) {
+
+		if( empty( $id ) )
+			return;
+
+		global $wpdb;
+		$table = $wpdb->prefix . 'paljet_images';
+
+		$wpdb->delete( $table, [ 'id' => intval( $id ) ], [ '%d' ] );
+
+		return true;
+	}
+
+
+		/*
+		Method to pending resources
+	 */
+	
+
+	/*
+		Method to pending resources
+	 */
+	
+	public static function process_pending_resources( $paljet, $product_id = 0 ) {
+		
+		// Product ID
+		if( ! isset( $paljet->bucket_id ) || empty( $paljet->bucket_id ) ) {
+			Paljet_Logs::add( 'error', sprintf(
+				esc_html__( 'Process Pending Resources : it has not a bucket_id ( Paljet ID : %s )', 'paljet' ),
+				$paljet->id
+			) );
+			return false;
+		}
+
+		$Product = wc_get_product( $product_id );
+		$gallery_product = (array)$Product->get_gallery_image_ids();
+
+
+		// The product has 2 loaded images on the gallery
+		if( count( $gallery_product ) >= 2 )
+			return false;
+
+
+		// init switch
+		$save = count( self::$PendingResources ) == 0;
+
+		if( ! $save ) {
+			$PendingProductID = wp_list_pluck( self::$PendingResources, 'product_id' );
+
+			$save = ! in_array( $product_id, $PendingProductID );
+		}
+
+
+		if( $save ) {
+			self::save_pending_resources( $paljet, $product_id );
+			update_post_meta( $product_id, 'paljet_resource_id', $paljet->bucket_id );
+		}
+	}
+	
+	public static function get_pending_resources() {
+		global $wpdb;
+
+		$table = $wpdb->prefix . 'paljet_resources';
+		$sql = 'SELECT * FROM ' . $table;
+		
+		$results = $wpdb->get_results( $sql, ARRAY_A );
+
+		return $wpdb->num_rows > 0 ? $results : [];
+	}
+
+	public static function save_pending_resources( $paljet, $product_id = 0 ) {
+
+		// Product ID
+		if( ! isset( $paljet->bucket_id ) || empty( $paljet->bucket_id ) ) {
+			Paljet_Logs::add( 'error', sprintf(
+				esc_html__( 'Pending Resources : it has not a bucket_id ( Paljet ID : %s )', 'paljet' ),
+				$paljet->id
+			) );
+			return false;
+		}
+
+		global $wpdb;
+
+		$table = $wpdb->prefix . 'paljet_resources';
+
+		$wpdb->insert(
+			$table,
+			[
+				'paljet_id'		=> $paljet->id,
+				'bucket_id'		=> $paljet->bucket_id,
+				'product_id'	=> $product_id,
+				'date_create'	=> current_time( 'mysql' )
+			],
+			[ '%d', '%s', '%d', '%s' ]
+		);
+
+
+		if( is_numeric( $wpdb->insert_id ) ) {
+			self::$PendingResources[] = [
+				'id'			=> $wpdb->insert_id,
+				'paljet_id'		=> $paljet->id,
+				'bucket_id'		=> $paljet->bucket_id,
+				'product_id'	=> $product_id,
+				'date_create'	=> current_time( 'mysql' )
+			];
+		}
+
+		return true;		
+	}
+
+	public static function delete_pending_resource( $id = null ) {
+		if( is_null($id) )
+			return;
+
+		global $wpdb;
+		$table = $wpdb->prefix . 'paljet_resources';
+
+		$wpdb->delete( $table, [ 'id' => intval( $id ) ], [ '%d' ] );
+
+		return true;
+	}
+
+
+	/*
+		CRON TASK
+	 */
+	
+	public static function set_pending_images() {
+
+		// It means a Paljet ajax process is executing
+		if( get_transient( 'paljet_ajax_sync' ) )
+			return false;
+
+		$PendingImages = self::get_pending_images();
+
+		if( count( $PendingImages ) == 0 )
+			return;
+
+		Paljet_Logs::add( 'notice', sprintf(
+			esc_html__('Set Pending Images : Start ( total : %d )', 'paljet'),
+			count( $PendingImages )
+		) );
+
+		add_filter( 'woocommerce_product_variation_get_image_id', '__return_false');
+
+		// Take the 80% of time
+		$time_max = intval( 0.8 * intval( ini_get('max_execution_time') ) );
+		$time_start = time();
+
+		$processed = 0;
+
+		foreach( $PendingImages as $PendingImage ) {
+
+			// If product is not exists, delete it
+			if( get_post_type( $PendingImage['product_id'] ) != 'product' ) {
+
+				Paljet_Logs::add( 'notice', sprintf(
+					esc_html__('Set Pending Images : It is not a WC product ( WC Product ID: %d )', 'paljet'),
+					$PendingImage['product_id']
+				) );
+
+				self::delete_pending_images( $PendingImage['id'] );
+				continue;
+			}
+
+			// Product Class by type
+			$Product = wc_get_product( $PendingImage['product_id'] );	
+
+
+			$ImagesDone = (array)get_post_meta(
+				$PendingImage['product_id'],
+				'paljet_images_urls',
+				true
+			);
+
+
+			// Upload the image to WP
+			$media_id = paljet_upload_media(
+				$PendingImage['image_url'],
+				$PendingImage['image_format'],
+				$PendingImage['image_desc']
+			);
+
+
+			// If this product has not the principal image uploaded
+			if( ! $Product->get_image_id() ) {
+				$Product->set_image_id( $media_id );
+
+			} else { //so, upload it to gallery
+
+				$gallery_images_ids = (array)$Product->get_gallery_image_ids();
+				array_push( $gallery_images_ids, $media_id);
+
+				$Product->set_gallery_image_ids( $gallery_images_ids );
+			}
+
+			$product_id = $Product->save();
+
+			// If error
+			if( is_wp_error( $product_id ) ) {
+				Paljet_Logs::add( 'notice', sprintf(
+					esc_html__('Set Pending Images: Saving the product ( WC Product ID: %s )', 'paljet'),
+					$PendingImage['product_id']
+				) );
+
+				Paljet_Logs::add( 'error', $product_id->get_error_message() );
+				return false;
+			}
+
+			// if it was saved successfully
+			$ImagesDone[] = $PendingImage['image_url'];
+			update_post_meta( $product_id, 'paljet_images_urls', $ImagesDone );
+
+			self::delete_pending_images( $PendingImage['id'] );
+
+
+			$processed++;
+
+
+			// We verify if the time is finished
+			$time_current = time();
+			$time_total = $time_current - $time_start;
+
+			if( $time_total >= $time_max ) {
+
+				$missing = count( $PendingImages ) - $processed;
+
+				Paljet_Logs::add( 'notice', sprintf(
+					esc_html__( 'Set Pending Images : End ( Processed : %d, Missing : %d )', 'paljet' ),
+					$processed,
+					$missing
+				) );
+				break;
+			}
+		}
+
+		Paljet_Logs::add( 'notice', sprintf(
+			esc_html__( 'Set Pending Images : End ( Processed : %d )', 'paljet' ),
+			$processed
+		) );
+	}
+
+	public static function set_pending_resources() {
+
+		// It means a Paljet ajax process is executing
+		if( get_transient( 'paljet_ajax_sync' ) )
+			return false;
+
+		// Take the 80% of time
+		$time_max = intval(0.8 * intval( ini_get('max_execution_time') ) );
+		$time_start = time();
+
+		// Pending Resources
+		$PendingResources = self::get_pending_resources();
+
+		if( count( $PendingResources ) == 0 )
+			return false;
+
+		Paljet_Logs::add( 'notice', sprintf(
+			esc_html__('Set Pending Resources : Start ( total : %d )', 'paljet'),
+			count( $PendingResources )
+		) );
+
+		$processed = 0;
+		$settings = get_option( 'paljet_settings', [] );
+		
+		foreach( $PendingResources as $resource ) {
+
+			$blocks = self::get_remote_resource( $settings['resources_url'], $resource );
+
+			if( $blocks === FALSE )
+				continue;
+			
+			$loop = 0;
+			$ImagesToUpload = [];
+			$ImagesPending = self::get_pending_images();
+			$ImagesDone = (array)get_post_meta( $resource['product_id'], 'paljet_images_urls', true);
+
+			foreach( $blocks as $block ) {
+				$loop++;
+
+				// Only 3 images
+				if( $loop > 3 )
+					break;
+
+				// If the image is uploaded, continue the loop
+				if( in_array( $block['url'], $ImagesDone ) )
+					continue;
+
+				// If the image is on the pending images table, continue the loop
+				if( count( $ImagesPending ) > 0 ) {
+
+					$waiting_list = false;
+					foreach( $ImagesPending as $item ) {
+						if( $item['product_id'] == $resource['product_id'] &&
+							$item['image_url'] == $block['url']
+						) {
+							$waiting_list = true;
+							break;
+						}
+					}
+
+					// If the image is on the pending images table
+					if( $waiting_list )
+						continue;
+				}
+
+				$ImagesToUpload[] = [
+					'product_id'	=> $resource['product_id'],
+					'image_url'		=> $block['url'],
+					'image_desc'	=> $block['description'],
+					'image_format'	=> $block['content_type'],
+				];
+			}
+
+			// Save resource to pending images
+			if( count( $ImagesToUpload ) > 0 )
+				self::save_pending_images( $ImagesToUpload );
+
+			unset( $blocks );
+			$processed++;
+
+			// Delete resource
+			self::delete_pending_resource( $resource['id'] );
+
+			// We verify if the time is finished
+			$time_current = time();
+			$time_total = $time_current - $time_start;
+
+			if( $time_total >= $time_max ) {
+
+				$missing = count( $PendingResources ) - $processed;
+
+				Paljet_Logs::add( 'notice', sprintf(
+					esc_html__( 'Set Pending Resources : End ( Processed : %d, Missing : %d )', 'paljet' ),
+					$processed,
+					$missing
+				) );
+				break;
+			}
+		}
+
+		Paljet_Logs::add( 'notice', sprintf(
+			esc_html__( 'Set Pending Resources : End ( Processed : %d )', 'paljet' ),
+			$processed
+		) );
+	}
+
+}
